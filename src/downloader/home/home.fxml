@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="535.0" prefWidth="985.0"
+      xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="downloader.home.HomeController">
+    <AnchorPane VBox.vgrow="ALWAYS">
+
+        <!--保存路径标签-->
+        <Label alignment="CENTER" layoutX="26.0" layoutY="35.0" style="&#10;" text="保存路径："
+               textAlignment="CENTER" textFill="#575757">
+            <font>
+                <Font size="21.0"/>
+            </font>
+        </Label>
+
+        <!--保存路径输入框-->
+        <TextField fx:id="textField" layoutX="147.0" layoutY="28.0" prefHeight="40.0" prefWidth="612.0">
+            <font>
+                <Font size="21.0"/>
+            </font>
+        </TextField>
+
+        <!--选择路径按钮-->
+        <Button fx:id="chooseButton" layoutX="788.0" layoutY="28.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="171.0"
+                text="选择路径">
+            <font>
+                <Font size="21.0"/>
+            </font>
+        </Button>
+
+        <!--URL输入框-->
+        <TextArea fx:id="textArea" layoutX="26.0" layoutY="91.0" prefHeight="353.0" prefWidth="933.0" promptText="输入URL，每个一行">
+            <font>
+                <Font size="21.0"/>
+            </font>
+        </TextArea>
+
+        <!--产生规则排序的URL-->
+        <Button fx:id="getButton" layoutX="26.0" layoutY="468.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="143.0"
+                text="有序URL" onAction="#startGetOrder">
+            <font>
+                <Font size="21.0"/>
+            </font>
+        </Button>
+
+        <!--下载按钮-->
+        <Button fx:id="downloadButton" layoutX="196.0" layoutY="468.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="763.0"
+                text="下载">
+            <font>
+                <Font size="21.0"/>
+            </font>
+        </Button>
+    </AnchorPane>
+</VBox>
