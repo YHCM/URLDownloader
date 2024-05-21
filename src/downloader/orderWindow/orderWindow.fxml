@@ -43,7 +43,8 @@
     </TextField>
 
     <!--执行按钮-->
-    <Button fx:id="outputButton" layoutX="382.0" layoutY="75.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="108.0" text="生成">
+    <Button fx:id="outputButton" layoutX="382.0" layoutY="75.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="108.0"
+            text="生成" onAction="#startOutput">
         <font>
             <Font size="21.0"/>
         </font>

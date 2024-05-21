@@ -5,6 +5,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 项目中要用的方法
@@ -95,5 +97,13 @@ public class Tool {
         String fileName = urlStr.substring(lastSlashIndex + 1);
 
         return fileName;
+    }
+
+    public static boolean isURL(String urlStr) {
+        Pattern pattern = Pattern.compile(
+                "^((https?|ftp|smtp):\\/\\/)?(www\\.)?[a-zA-Z0-9]+\\.[a-zA-Z]{2,}"
+                        + "(:[0-9]{1,5})?((\\/\\w+)*(\\/)?([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?)?$");
+        Matcher matcher = pattern.matcher(urlStr);
+        return matcher.matches();
     }
 }
