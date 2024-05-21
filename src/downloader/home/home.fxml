@@ -31,7 +31,7 @@
 
         <!--选择路径按钮-->
         <Button fx:id="chooseButton" layoutX="788.0" layoutY="28.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="171.0"
-                text="选择路径">
+                text="选择路径" onAction="#chooseDirectory">
             <font>
                 <Font size="21.0"/>
             </font>
@@ -46,7 +46,7 @@
 
         <!--产生规则排序的URL-->
         <Button fx:id="getButton" layoutX="26.0" layoutY="468.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="143.0"
-                text="有序URL" onAction="#startGetOrder">
+                text="有序URL" onAction="#startOrderWindow">
             <font>
                 <Font size="21.0"/>
             </font>

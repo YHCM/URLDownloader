@@ -1,10 +1,10 @@
-package downloader.order;
+package downloader.orderWindow;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class OrderController {
+public class OrderWindowController {
     @FXML
     public TextField startText;
     @FXML

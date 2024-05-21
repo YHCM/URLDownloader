@@ -1,4 +1,4 @@
-package downloader.order;
+package downloader.orderWindow;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,8 +8,8 @@ import javafx.stage.Stage;
 
 import java.util.Objects;
 
-public class Order extends Application {
-    public Order() {
+public class OrderWindow extends Application {
+    public OrderWindow() {
 
     }
     @Override
@@ -22,7 +22,7 @@ public class Order extends Application {
         stage.setResizable(false);
 
         // 设置 fxml 文件
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/downloader/order/order.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/downloader/orderWindow/orderWindow.fxml")));
         Scene scene = new Scene(root, width, height);
 
         stage.setScene(scene);

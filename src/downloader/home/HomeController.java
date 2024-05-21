@@ -1,18 +1,16 @@
 package downloader.home;
 
 import downloader.model.URLModel;
-import downloader.order.Order;
+import downloader.orderWindow.OrderWindow;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class HomeController {
     @FXML
@@ -26,12 +24,26 @@ public class HomeController {
     @FXML
     public Button downloadButton;
 
+    private String saveDirectory;     // 保存目录
     private List<URLModel> urls = new ArrayList<>();    // URL列表
     private URLModel urlModel;
 
-    public void startGetOrder() throws Exception {
-        Order order = new Order();
+    public void chooseDirectory() {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("选择保存目录");
 
-        order.start(new Stage());
+        saveDirectory = String.valueOf(directoryChooser.showDialog(new Stage()));
+        textField.setText(saveDirectory);
+        System.out.println("保存目录：" + saveDirectory);
+    }
+
+    public void download() {
+
+    }
+
+    public void startOrderWindow() throws Exception {
+        OrderWindow orderWindow = new OrderWindow();
+
+        orderWindow.start(new Stage());
     }
 }
