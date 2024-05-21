@@ -4,7 +4,7 @@ import java.net.URL;
 
 // URL相关类，获取相应信息
 public class URLModel {
-    private String urlString;      // 链接的字符串形式
+    private String urlStr;      // 链接的字符串形式
     private URL url;        // 链接
 
 
@@ -12,22 +12,18 @@ public class URLModel {
 
     }
 
-    public URLModel(String urlString) {
-        this.urlString = urlString;
+    public URLModel(String urlStr) throws Exception{
+        this.urlStr = urlStr;
 
-        try {
-            url = new URL(urlString);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        url = new URL(urlStr);
     }
 
-    public String getUrlString() {
-        return urlString;
+    public String getUrlStr() {
+        return urlStr;
     }
 
-    public void setUrlString(String urlString) {
-        this.urlString = urlString;
+    public void setUrlStr(String urlStr) {
+        this.urlStr = urlStr;
     }
 
     public URL getUrl() {

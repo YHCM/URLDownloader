@@ -88,4 +88,12 @@ public class Tool {
         bos.close();
         return bos.toByteArray();
     }
+
+    public static String getFileName(String urlStr) {
+        int lastSlashIndex = urlStr.lastIndexOf('/');       // 获取最后一个 / 的位置
+
+        String fileName = urlStr.substring(lastSlashIndex + 1);
+
+        return fileName;
+    }
 }
