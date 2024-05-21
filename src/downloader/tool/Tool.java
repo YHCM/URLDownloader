@@ -26,11 +26,12 @@ public class Tool {
         int lastDotIndex = exampleURL.lastIndexOf('.');         // 获取最后一个 . 的位置
 
         // 获取要替换的数字部分
-        String numberString = exampleURL.substring(lastSlashIndex + 1, lastDotIndex);
+//        String numberString = exampleURL.substring(lastSlashIndex + 1, lastDotIndex);
 
         // 开始产生有序URL序列
         for (int i = start; i <= end; i++) {
-            String newURL = exampleURL.replace(numberString, String.valueOf(i));
+//            String newURL = exampleURL.replace(numberString, String.valueOf(i));
+            String newURL = exampleURL.substring(0, lastSlashIndex + 1) + String.valueOf(i) + exampleURL.substring(lastDotIndex);
 
             orderURLs.add(newURL);
         }
@@ -97,13 +98,5 @@ public class Tool {
         String fileName = urlStr.substring(lastSlashIndex + 1);
 
         return fileName;
-    }
-
-    public static boolean isURL(String urlStr) {
-        Pattern pattern = Pattern.compile(
-                "^((https?|ftp|smtp):\\/\\/)?(www\\.)?[a-zA-Z0-9]+\\.[a-zA-Z]{2,}"
-                        + "(:[0-9]{1,5})?((\\/\\w+)*(\\/)?([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?)?$");
-        Matcher matcher = pattern.matcher(urlStr);
-        return matcher.matches();
     }
 }
