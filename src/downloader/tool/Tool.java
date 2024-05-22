@@ -1,12 +1,19 @@
 package downloader.tool;
 
+import javax.net.ssl.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 
 /**
  * 项目中要用的方法
@@ -47,14 +54,44 @@ public class Tool {
      */
     public static void download(String urlStr, String savePath, String fileName) {
         try {
-            URL url = new URL(urlStr);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            // 设置超时为3秒
-            connection.setConnectTimeout(3 * 1000);
-            // 防止屏蔽程序抓取而返回403错误
-            connection.setRequestProperty("User-Agent", "Mozilla/5.0");
+            SSLContext sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, new TrustManager[]{
+                    new X509TrustManager() {
+                        @Override
+                        public void checkClientTrusted(X509Certificate[] x509Certificates, String s) throws CertificateException {
 
-            // 获取输入流
+                        }
+
+                        @Override
+                        public void checkServerTrusted(X509Certificate[] x509Certificates, String s) throws CertificateException {
+
+                        }
+
+                        @Override
+                        public X509Certificate[] getAcceptedIssuers() {
+                            return new X509Certificate[0];
+                        }
+                    }
+            }, new SecureRandom());
+
+            URL url = new URL(urlStr);
+            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+            connection.setConnectTimeout(10 * 1000);
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0");
+            connection.setDoInput(true);
+            connection.setDoOutput(true);
+
+            // 忽略证书相关操作
+            connection.setSSLSocketFactory(sslContext.getSocketFactory());
+            connection.setHostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String s, SSLSession sslSession) {
+                    return true;
+                }
+            });
+            connection.connect();
+
+            // 得到输入流
             InputStream inputStream = connection.getInputStream();
             // 获取字节数组
             byte[] getData = readInputStream(inputStream);
@@ -64,20 +101,17 @@ public class Tool {
             if (!saveDir.exists()) {
                 saveDir.mkdir();
             }
-
             File file = new File(saveDir + File.separator + fileName);
-            FileOutputStream fos = new FileOutputStream(file);
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            fileOutputStream.write(getData);
 
-            fos.write(getData);
-            if (fos != null) {
-                fos.close();
-            }
-            if (inputStream != null) {
-                inputStream.close();
-            }
-            System.out.println(url + " 下载完成");
-        } catch (IOException e) {
-            e.printStackTrace();
+            connection.disconnect();
+            fileOutputStream.close();
+            inputStream.close();
+
+            System.out.println("URL： " + url + " 下载完成");
+        } catch (NoSuchAlgorithmException | KeyManagementException | IOException exception) {
+            exception.printStackTrace();
         }
     }
 

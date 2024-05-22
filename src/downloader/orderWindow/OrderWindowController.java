@@ -19,6 +19,8 @@ public class OrderWindowController {
     public Button outputButton;
 
     public void startOutput() {
+        System.out.println("开始输出有序URL");
+
         int start = Integer.parseInt(startText.getText());
         int end = Integer.parseInt(endText.getText());
 

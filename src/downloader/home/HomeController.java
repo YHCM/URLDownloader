@@ -58,6 +58,8 @@ public class HomeController implements Initializable {
     }
 
     public void download() {
+        System.out.println("开始下载");
+
         for (URLModel aUrlModel : urlModels) {
             String urlStr = aUrlModel.getUrlStr();
             String fileName = Tool.getFileName(urlStr);
