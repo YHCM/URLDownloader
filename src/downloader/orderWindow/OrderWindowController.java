@@ -3,6 +3,7 @@ package downloader.orderWindow;
 import downloader.tool.Tool;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
@@ -19,7 +20,11 @@ public class OrderWindowController {
     public Button outputButton;
 
     public void startOutput() {
+        TextArea textArea = OrderWindow.getTextArea();
+        textArea.clear();
+
         System.out.println("开始输出有序URL");
+
 
         int start = Integer.parseInt(startText.getText());
         int end = Integer.parseInt(endText.getText());
@@ -30,6 +35,8 @@ public class OrderWindowController {
 
         for (String str : output) {
             System.out.println(str);
+
+            textArea.appendText(str + "\n");
         }
     }
 }

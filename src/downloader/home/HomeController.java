@@ -66,10 +66,12 @@ public class HomeController implements Initializable {
 
             Tool.download(urlStr, saveDirectory, fileName);
         }
+
+        System.out.println("\n下载完毕");
     }
 
     public void startOrderWindow() throws Exception {
-        OrderWindow orderWindow = new OrderWindow();
+        OrderWindow orderWindow = new OrderWindow(textArea);
 
         orderWindow.start(new Stage());
     }

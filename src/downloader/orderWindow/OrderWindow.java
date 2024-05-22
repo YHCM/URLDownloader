@@ -4,13 +4,15 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 import java.util.Objects;
 
 public class OrderWindow extends Application {
-    public OrderWindow() {
-
+    public static TextArea textArea;
+    public OrderWindow(TextArea textArea) {
+        OrderWindow.textArea = textArea;
     }
     @Override
     public void start(Stage stage) throws Exception {
@@ -28,5 +30,9 @@ public class OrderWindow extends Application {
         stage.setScene(scene);
         stage.show();
         System.out.println("产生有序URL窗口启动...");
+    }
+
+    public static TextArea getTextArea() {
+        return textArea;
     }
 }
