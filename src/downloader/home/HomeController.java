@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class HomeController implements Initializable {
+public class HomeController {
     @FXML
     public TextField textField;
     @FXML
@@ -33,20 +33,20 @@ public class HomeController implements Initializable {
     private List<URLModel> urlModels = new ArrayList<>();    // URL列表
     private URLModel urlModel;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        textArea.textProperty().addListener((observable, oldValue, newValue) -> {
-            String[] urls = newValue.split("\\n");      // 以回车分割
-            urlModels.clear();
-            for (String url : urls) {
-                try {
-                    urlModels.add(new URLModel(url));
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-    }
+//    @Override
+//    public void initialize(URL location, ResourceBundle resources) {
+//        textArea.textProperty().addListener((observable, oldValue, newValue) -> {
+//            String[] urls = newValue.split("\\n");      // 以回车分割
+//            urlModels.clear();
+//            for (String url : urls) {
+//                try {
+//                    urlModels.add(new URLModel(url));
+//                } catch (Exception e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//        });
+//    }
 
     public void chooseDirectory() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
@@ -58,6 +58,17 @@ public class HomeController implements Initializable {
     }
 
     public void download() {
+        // 读取TextArea中的URL
+        String[] urls = textArea.getText().split("\\n");      // 以回车分割
+        urlModels.clear();
+        for (String url : urls) {
+            try {
+                urlModels.add(new URLModel(url));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         System.out.println("开始下载");
 
         for (URLModel aUrlModel : urlModels) {
